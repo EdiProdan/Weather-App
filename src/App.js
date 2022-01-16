@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import HomePage from './components/HomePage';
+import CityPage from './components/CityPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+   const [city, setCity] = useState('');
+
+   const addCity = (city) => {
+      setCity(city);
+   };
+
+   return (
+      <Router>
+         <Routes>
+            <Route path='/' element={<HomePage addCity={addCity} />} />
+            <Route
+               path='/citypage'
+               element={<CityPage city={city} addCity={addCity} />}
+            />
+         </Routes>
+      </Router>
+   );
+};
 
 export default App;
